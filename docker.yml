@@ -1,0 +1,21 @@
+- hosts: all
+  remote_user: root
+  tasks:
+     - name: download install script
+       shell: curl -fsSL get.docker.com -o /root/get-docker.sh
+     - name: run get-docker.sh
+       shell: sh get-docker.sh --mirror Aliyun
+     - name: create /etc/docker
+       file:
+         path: /etc/docker
+         state: directory
+     - name: copy daemon config
+       template:
+         src: daemon.json
+         dest: /etc/docker/daemon.json
+     - name: start docker
+       systemd:
+         name: docker
+         daemon_reload: true
+         state: restarted
+         enabled: true

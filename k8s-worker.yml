@@ -1,0 +1,5 @@
+- hosts: worker
+  remote_user: root
+  tasks:
+     - name: initialize worker node
+       shell: sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.4.8 --server https://192.168.1.20:9443 --token xnfvhph8dwfx8svvbjb84xfq796gwwgmwxlxz4s6mmg8z8b9lj9b6r --ca-checksum f99e13f9c91f34ae6f4ab1cb13a2e46db8bb068a728779cddcd3c8238218a609 --worker --label node=worker

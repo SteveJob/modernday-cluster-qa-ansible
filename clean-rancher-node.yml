@@ -1,0 +1,9 @@
+- hosts: all
+  remote_user: root
+  tasks:
+     - name: copy clean-rancher-node.sh
+       template:
+         src: clean-rancher-node.sh
+         dest: /root/clean-rancher-node.sh
+     - name: clean rancher node
+       shell: sh clean-rancher-node.sh
